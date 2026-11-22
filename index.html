@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#143821" />
+  <title>AgriCad</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+</head>
+<body>
+  <!-- Tela de inicialização mostrada enquanto o Python carrega no navegador -->
+  <div id="boot" role="status" aria-live="polite">
+    <img src="assets/logo.svg" alt="" />
+    <div class="bar"><i></i></div>
+    <p>Iniciando o AgriCad...</p>
+    <small>Está demorando mais que o normal. Na primeira visita o Python leva alguns segundos para carregar. Se nada mudar, recarregue a página.</small>
+    <noscript><p>Ative o JavaScript para usar o AgriCad.</p></noscript>
+  </div>
+
+  <div id="app" class="layout" hidden>
+    <!-- Lado esquerdo: imagem + chamada -->
+    <aside class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <svg viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#3d6b45" />
+              <stop offset=".55" stop-color="#24452b" />
+              <stop offset="1" stop-color="#18231a" />
+            </linearGradient>
+            <radialGradient id="glow" cx=".3" cy=".25" r=".6">
+              <stop offset="0" stop-color="#9cc58d" stop-opacity=".35" />
+              <stop offset="1" stop-color="#9cc58d" stop-opacity="0" />
+            </radialGradient>
+            <g id="leaf"><path d="M0 0 C 30 -40, 90 -45, 120 -10 C 90 25, 30 25, 0 0 Z" /></g>
+            <g id="plant">
+              <path d="M0 0 C 4 -80, -6 -160, 2 -240" stroke="#2e5a34" stroke-width="6" fill="none" />
+              <use href="#leaf" transform="translate(2 -230) rotate(-35)" />
+              <use href="#leaf" transform="translate(2 -230) rotate(-145) scale(1 -1)" />
+              <use href="#leaf" transform="translate(0 -160) rotate(-15) scale(.9)" />
+              <use href="#leaf" transform="translate(0 -140) rotate(-170) scale(.85 -.85)" />
+              <use href="#leaf" transform="translate(0 -80) rotate(5) scale(.7)" />
+              <use href="#leaf" transform="translate(0 -70) rotate(185) scale(.7 -.7)" />
+            </g>
+          </defs>
+          <rect width="800" height="1000" fill="url(#sky)" />
+          <rect width="800" height="1000" fill="url(#glow)" />
+          <g fill="#4f8a50" opacity=".35">
+            <use href="#plant" transform="translate(520 720) scale(.6)" />
+            <use href="#plant" transform="translate(660 700) scale(.5)" />
+            <use href="#plant" transform="translate(400 700) scale(.45)" />
+          </g>
+          <g fill="#5c9b58" opacity=".6">
+            <use href="#plant" transform="translate(300 860) scale(1.1)" />
+            <use href="#plant" transform="translate(620 900) scale(1.2)" />
+          </g>
+          <g fill="#6fae63" opacity=".9">
+            <use href="#plant" transform="translate(150 980) scale(2)" />
+          </g>
+          <path d="M0 860 C 200 830, 500 880, 800 840 L 800 1000 L 0 1000 Z" fill="#1d2a1e" />
+          <path d="M0 920 C 250 900, 550 940, 800 910 L 800 1000 L 0 1000 Z" fill="#141c15" />
+        </svg>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="brand brand-light">
+        <img src="assets/logo.svg" alt="AgriCad" width="48" height="48" />
+        <span>AgriCad</span>
+      </div>
+      <div class="hero-text">
+        <p class="hero-title">Gestão agrícola inteligente para sua propriedade.</p>
+        <p class="hero-sub">Controle safras, despesas, insumos e rentabilidade em um só lugar.</p>
+      </div>
+    </aside>
+
+    <!-- Lado direito: conteúdo gerado pelo Python (main.py) -->
+    <main class="panel">
+      <div id="view" class="card"></div>
+    </main>
+  </div>
+
+  <script type="py" src="main.py" config="pyscript.toml"></script>
+  <script>
+    setTimeout(function () { var b = document.getElementById("boot"); if (b) b.classList.add("slow"); }, 10000);
+  </script>
+</body>
+</html>
